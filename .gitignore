@@ -1,0 +1,53 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsix
+*.cache
+*.log
+*.dbmdl
+*.opendb
+
+# Build Folders
+[Bb]in/
+[Oo]bj/
+**/bin/
+**/obj/
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# Rider
+.idea/
+
+# Resharper
+_ReSharper*/
+*.ReSharper*/
+*.DotSettings.user
+
+# Visual Studio Code
+.vscode/
+
+# Test result files
+*.trx
+*.coverage
+
+# Other
+*.bak
+*.backup
+*.orig
+*.tmp
+*.temp
+
+# Ignore user-specific files
+*.userprefs
+
+# Git LFS placeholder
+*.psd.lfs
