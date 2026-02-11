@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTaskManager
 {
-    internal class TodoTask
+    public class TodoTask
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";

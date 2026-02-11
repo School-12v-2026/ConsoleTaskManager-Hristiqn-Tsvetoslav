@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTaskManager
 {
-    internal class TaskService
+    public class TaskService
     {
         private readonly TaskRepository _repo;
         private List<TodoTask> _tasks;
@@ -27,24 +27,30 @@ namespace ConsoleTaskManager
             _repo.Save(_tasks);
         }
 
-        public void DeleteById(int id)
+        public bool Delete(int id)
         {
             var task = _tasks.FirstOrDefault(t => t.Id == id);
             if (task != null)
             {
                 _tasks.Remove(task);
                 _repo.Save(_tasks);
+                return true;
             }
+
+            return false;
         }
 
-        public void MarkCompleted(int id)
+        public bool MarkCompleted(int id)
         {
             var task = _tasks.FirstOrDefault(t => t.Id == id);
             if (task != null)
             {
                 task.IsCompleted = true;
                 _repo.Save(_tasks);
+                return true;
             }
+
+            return false;
         }
 
         public void SortByName()

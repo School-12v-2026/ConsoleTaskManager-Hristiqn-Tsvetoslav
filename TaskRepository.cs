@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ConsoleTaskManager
 {
-    internal class TaskRepository
+    public class TaskRepository
     {
         private readonly string _filePath;
 

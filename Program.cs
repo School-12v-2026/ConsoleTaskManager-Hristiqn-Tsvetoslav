@@ -10,6 +10,14 @@ namespace ConsoleTaskManager
     {
         static void Main(string[] args)
         {
+        
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            var repository = new TaskRepository("tasks.txt");
+            var service = new TaskService(repository);
+            var ui = new ConsoleUI(service);
+
+            ui.Run();
         }
     }
 }
