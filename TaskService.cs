@@ -64,5 +64,26 @@ namespace ConsoleTaskManager
             _tasks = _tasks.OrderBy(t => t.IsCompleted).ToList();
             _repo.Save(_tasks);
         }
+        public List<TodoTask> Search(string text, bool? status)
+        {
+            var tasks = _tasks;
+
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                var q = text.Trim();
+                tasks = tasks
+                    .Where(t => t.Name != null && t.Name.IndexOf(q, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                    .ToList();
+            }
+
+            if (status.HasValue)
+            {
+                tasks = tasks
+                    .Where(t => t.IsCompleted == status.Value)
+                    .ToList();
+            }
+
+            return tasks;
+        }
     }
 }

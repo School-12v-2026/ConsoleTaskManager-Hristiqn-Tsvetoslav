@@ -35,6 +35,7 @@ namespace ConsoleTaskManager
                     case "3": CompleteTask(); break;
                     case "4": DeleteTask(); break;
                     case "5": SortMenu(); break;
+                    case "6": SearchTasks(); break;
                     case "0": return;
                     default:
                         ShowMessage("Невалиден избор!", ConsoleColor.Red);
@@ -60,6 +61,7 @@ namespace ConsoleTaskManager
             Console.WriteLine("3) Маркирай като завършена");
             Console.WriteLine("4) Изтрий задача");
             Console.WriteLine("5) Сортиране");
+            Console.WriteLine("6) Търсене");
             Console.WriteLine("0) Изход");
             Console.ResetColor();
             Console.WriteLine();
@@ -190,5 +192,52 @@ namespace ConsoleTaskManager
             Console.WriteLine("\nНатисни ENTER...");
             Console.ReadLine();
         }
+        private void SearchTasks()
+        {
+            Console.Clear();
+            ShowHeader();
+
+            Console.Write("Текст за търсене (празно = всички): ");
+            string text = Console.ReadLine();
+
+            Console.WriteLine("Филтър по статус:");
+            Console.WriteLine("1) Всички");
+            Console.WriteLine("2) Само завършени");
+            Console.WriteLine("3) Само незавършени");
+
+            Console.Write("Избор: ");
+            string choice = Console.ReadLine();
+
+            bool? status = null;
+
+            if (choice == "2")
+                status = true;
+            else if (choice == "3")
+                status = false;
+
+            var results = _service.Search(text, status);
+
+            Console.WriteLine("\nРезултати:");
+            Console.WriteLine("ID | Име | Статус");
+            Console.WriteLine("-----------------------");
+
+            foreach (var task in results)
+            {
+                Console.ForegroundColor = task.IsCompleted
+                    ? ConsoleColor.Green
+                    : ConsoleColor.Red;
+
+                Console.WriteLine($"{task.Id} | {task.Name} | {(task.IsCompleted ? "Завършена" : "Незавършена")}");
+                Console.ResetColor();
+            }
+
+            if (results.Count == 0)
+            {
+                ShowMessage("Няма намерени задачи.", ConsoleColor.Red);
+            }
+
+            Pause();
+        }
+
     }
 }
